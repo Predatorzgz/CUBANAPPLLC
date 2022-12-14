@@ -43,7 +43,8 @@ contract CUBANAPP is Ownable, TRC1155 {
         [1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000,1000000];
 
 		*/
-		_mint(msg.sender, 100, 1000, "");
+		address owner = _msgSender();
+		_mint(owner, 100, 1000, "");
 		_name = name_;
 		_symbol = symbol_;
 	}
@@ -152,6 +153,20 @@ contract CUBANAPP is Ownable, TRC1155 {
 		return true;
     }
     
+     /**
+    *
+    * @dev send all trx balance in the contract to owner address
+    *
+    */
+    function reclaimTRX() external onlyOwner returns (bool){
+		uint256 balance = address(this).balance;
+		require(balance > 0, "Balance is 0");
+		
+		address to = _msgSender();
+        payable(to).transfer(balance);
+		return true;
+    }
+    
     /**
     *
     * @dev send all trc10 balance in the contract to owner address
@@ -176,7 +191,6 @@ contract CUBANAPP is Ownable, TRC1155 {
 		address to = _msgSender();
 		_token.transfer(to, balance);
 
-		//emit Retire(_token, address(this), msg.sender, _amount);
 		return true;
 	}
 	
@@ -193,6 +207,7 @@ contract CUBANAPP is Ownable, TRC1155 {
 		nft_.safeTransferFrom(address(this), to, tokenId_);
 		return true;
     }
+	
     /**
     *
     * @dev send MultiToken balance in the contract to owner address
