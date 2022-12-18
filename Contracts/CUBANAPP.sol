@@ -6,7 +6,7 @@ pragma solidity >=0.8.1 <=0.9.0;
 import "./Ownable.sol";
 import "./TRC1155.sol";
 import "./Address.sol";
-import "./Timers.sol";
+//import "./Timers.sol";
 import "./ITRC20.sol";
 import "./ITRC721.sol";
 import "./ITRC1155.sol";
@@ -17,7 +17,7 @@ import "./ITRC1155.sol";
  */
 contract CUBANAPP is Ownable, TRC1155 {
 	using Address for address;
-	using Timers for uint64;
+	//using Timers for uint64;
 	
 	ITRC20 constant usdtToken = ITRC20(address(0x00eca9bc828a3005b9a3b909f2cc5c2a54794de05f));
 	// shasta base58 TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs 
