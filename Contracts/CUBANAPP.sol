@@ -138,20 +138,6 @@ contract CUBANAPP is Ownable, TRC1155 {
             }
         }
     }
-
-    /**
-    *
-    * @dev send all trx balance in the contract to owner address
-    *
-    */
-    function reclaimTRX() external onlyOwner returns (bool){
-		uint256 balance = address(this).balance;
-		require(balance > 0, "Balance is 0");
-		
-		address to = _msgSender();
-        payable(to).transfer(balance);
-		return true;
-    }
     
      /**
     *
